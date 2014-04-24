@@ -1187,6 +1187,10 @@ static int check_version(Elf_Shdr *sechdrs,
 {
 	unsigned int i, num_versions;
 	struct modversion_info *versions;
+	
+	/* make exception in module loading to load propietary module exfat */
+	if(!strncmp("exfat_", mod->name, 6))
+		return 1;
 
 	/* Exporting module didn't supply crcs?  OK, we're already tainted. */
 	if (!crc)
